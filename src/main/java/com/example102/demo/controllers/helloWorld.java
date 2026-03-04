@@ -14,6 +14,6 @@ public class helloWorld {
     @GetMapping("/")
     public String getMethodName(@RequestParam String name) {
         return service.generateMessage(name);
-    }i
+    }
     
 }
