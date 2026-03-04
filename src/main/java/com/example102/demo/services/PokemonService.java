@@ -16,9 +16,9 @@ public class PokemonService {
     private final Random random = new Random();
 
     public PokemonService() {
-        pokemonList.add(new Pokemon("Bulbasaur", 0, 45, 49, 45, 45));
-        pokemonList.add(new Pokemon("Charmander", 1, 52, 43, 65, 39));
-        pokemonList.add(new Pokemon("Squirtle", 2, 48, 65, 43, 44));
+        pokemonList.add(new Pokemon("Bulbasaur", 1, 45, 49, 45, 45));
+        pokemonList.add(new Pokemon("Charmander", 4, 52, 43, 65, 39));
+        pokemonList.add(new Pokemon("Squirtle", 7, 48, 65, 43, 44));
         pokemonList.add(new Pokemon("Pikachu", 25, 55, 40, 90, 35));
     }
 

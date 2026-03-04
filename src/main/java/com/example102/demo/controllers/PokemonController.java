@@ -2,6 +2,7 @@ package com.example102.demo.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.example102.demo.services.PokemonService;
 
 @RestController
 @RequestMapping("/pokemon")
+@CrossOrigin
 public class PokemonController {
 
     private final PokemonService service;

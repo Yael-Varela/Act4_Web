@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokemon Breeder</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .pokemon-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            display: inline-block;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        img {
+            width: 120px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin-top: 10px;
+        }
+
+        select, input {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pokemon Breeder</h1>
+
+<h2>Breed New Pokemon</h2>
+
+<select id="parent1"></select>
+<select id="parent2"></select>
+<input type="text" id="babyName" placeholder="Baby Name" />
+<button onclick="breedPokemon()">Hatch</button>
+
+<hr>
+
+<h2>All Pokemon</h2>
+<div id="pokemonList"></div>
+
+<script>
+
+const API_BASE = "http://localhost:8080"; // change if using 9090
+
+async function loadPokemon() {
+    const response = await fetch(`${API_BASE}/pokemon`);
+    const data = await response.json();
+
+    const listDiv = document.getElementById("pokemonList");
+    const parent1Select = document.getElementById("parent1");
+    const parent2Select = document.getElementById("parent2");
+
+    listDiv.innerHTML = "";
+    parent1Select.innerHTML = "";
+    parent2Select.innerHTML = "";
+
+    data.forEach(pokemon => {
+
+        // Create Card
+        const card = document.createElement("div");
+        card.className = "pokemon-card";
+
+        card.innerHTML = `
+            <h3>${pokemon.name}</h3>
+            <img src="${API_BASE}/pokemon_image/${pokemon.pokedexId}" />
+            <p>Attack: ${pokemon.attack}</p>
+            <p>Defense: ${pokemon.defense}</p>
+            <p>Speed: ${pokemon.speed}</p>
+            <p>HP: ${pokemon.hp}</p>
+        `;
+
+        listDiv.appendChild(card);
+
+        // Add to dropdowns
+        const option1 = document.createElement("option");
+        option1.value = pokemon.id;
+        option1.text = pokemon.name;
+        parent1Select.appendChild(option1);
+
+        const option2 = document.createElement("option");
+        option2.value = pokemon.id;
+        option2.text = pokemon.name;
+        parent2Select.appendChild(option2);
+    });
+}
+
+async function breedPokemon() {
+    const parent1 = document.getElementById("parent1").value;
+    const parent2 = document.getElementById("parent2").value;
+    const name = document.getElementById("babyName").value;
+
+    if (!name) {
+        alert("Enter a baby name");
+        return;
+    }
+
+    await fetch(`${API_BASE}/pokemon/hatch?parent1=${parent1}&parent2=${parent2}&name=${name}`, {
+        method: "POST"
+    });
+
+    document.getElementById("babyName").value = "";
+
+    loadPokemon();
+}
+
+loadPokemon();
+
+</script>
+
+</body>
+</html>
