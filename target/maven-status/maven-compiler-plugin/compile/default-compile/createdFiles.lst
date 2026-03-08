@@ -1,0 +1,6 @@
+com/example102/demo/PokemonApplication.class
+com/example102/demo/services/PokemonService.class
+com/example102/demo/controllers/PokemonImageController.class
+com/example102/demo/controllers/PokemonController.class
+com/example102/demo/services/PokemonImageService.class
+com/example102/demo/models/Pokemon.class
