@@ -1,7 +1,7 @@
-import NavBar from "./pages/Navbar/navbar";
-import Home from "./pages/MainPages/Home";
+import NavBar from "./pages/Navbar/NavBar";
+import Home from "./pages/Mainpages/Home";
 
-export default function App() {
+function App() {
   return (
     <>
       <NavBar />
@@ -9,3 +9,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;
