@@ -6,6 +6,8 @@ export default function PokemonForm() {
   const [pokemonList, setPokemonList] = useState([]);
   const [parent1, setParent1] = useState("");
   const [parent2, setParent2] = useState("");
+  const [item, setItem] = useState("");
+  const [nature, setNature] = useState("");
   const [name, setName] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
@@ -20,7 +22,7 @@ export default function PokemonForm() {
       const data = await getAllPokemon();
       setPokemonList(data);
     } catch {
-      setError("Error cargando los pokémon");
+      setError("Error loading the data");
     }
   }
 
@@ -30,12 +32,14 @@ export default function PokemonForm() {
     setLoading(true);
 
     try {
-      const baby = await hatchPokemon(parent1, parent2, name);
+      const baby = await hatchPokemon(parent1, parent2, name, item, nature);
       setResult(baby);
       setName("");
+      setNature("")
+      setItem("")
       await loadPokemon();
     } catch {
-      setError("No se pudo crear el pokémon");
+      setError("ERROR: Pokemon not created");
     } finally {
       setLoading(false);
     }
@@ -56,7 +60,7 @@ export default function PokemonForm() {
                 onChange={(e) => setParent1(e.target.value)}
                 required
               >
-                <option value="">Selecciona un pokémon</option>
+                <option value="">Choose a Pokemon</option>
                 {pokemonList.map((pokemon) => (
                   <option key={pokemon.id} value={pokemon.id}>
                     {pokemon.name}
@@ -73,7 +77,7 @@ export default function PokemonForm() {
                 onChange={(e) => setParent2(e.target.value)}
                 required
               >
-                <option value="">Selecciona un pokémon</option>
+                <option value="">Choose a Pokemon</option>
                 {pokemonList.map((pokemon) => (
                   <option key={pokemon.id} value={pokemon.id}>
                     {pokemon.name}
@@ -89,13 +93,38 @@ export default function PokemonForm() {
                 className="form-control"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Escribe el nombre"
+                placeholder="Choose a name"
+                required
+              />
+            </div>
+
+
+            <div className="mb-3">
+              <label className="form-label">Nature</label>
+              <input
+                type="text"
+                className="form-control"
+                value={nature}
+                onChange={(e) => setNature(e.target.value)}
+                placeholder="Insert a nature"
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Item</label>
+              <input
+                type="text"
+                className="form-control"
+                value={item}
+                onChange={(e) => setItem(e.target.value)}
+                placeholder="Insert an item"
                 required
               />
             </div>
 
             <button type="submit" className="btn btn-primary" disabled={loading}>
-              {loading ? "Creando..." : "Hatch Pokemon"}
+              {loading ? "Creating..." : "Hatch Pokemon"}
             </button>
           </form>
 

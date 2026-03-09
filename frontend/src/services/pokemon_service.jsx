@@ -10,11 +10,13 @@ export async function getAllPokemon() {
   return response.json();
 }
 
-export async function hatchPokemon(parent1, parent2, name) {
+export async function hatchPokemon(parent1, parent2, name, item, nature) {
   const params = new URLSearchParams({
     parent1,
     parent2,
     name,
+    item,
+    nature
   });
 
   const response = await fetch(`${API_URL}/pokemon/hatch?${params.toString()}`, {

@@ -32,8 +32,9 @@ public class PokemonController {
     public Pokemon hatch(
             @RequestParam String parent1,
             @RequestParam String parent2,
-            @RequestParam String name) {
-
-        return service.hatchPokemon(parent1, parent2, name);
+            @RequestParam String name,
+            @RequestParam String item,
+            @RequestParam String nature){
+        return service.hatchPokemon(parent1, parent2, name, item, nature);
     }
 }

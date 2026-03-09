@@ -6,7 +6,7 @@ export default function PokemonResult({ pokemon }) {
   return (
     <div className="card shadow mt-4">
       <div className="card-body text-center">
-        <h3 className="card-title mb-3">Nuevo Pokémon creado</h3>
+        <h3 className="card-title mb-3">A new pokemon has hatched!</h3>
 
         <img
           src={getPokemonImageUrl(pokemon.pokedexId)}
@@ -16,11 +16,13 @@ export default function PokemonResult({ pokemon }) {
         />
 
         <p><strong>Nombre:</strong> {pokemon.name}</p>
+        <p><strong>Nature:</strong> {pokemon.nature}</p>
         <p><strong>Attack:</strong> {pokemon.attack}</p>
         <p><strong>Defense:</strong> {pokemon.defense}</p>
         <p><strong>Speed:</strong> {pokemon.speed}</p>
         <p><strong>HP:</strong> {pokemon.hp}</p>
         <p><strong>Pokedex ID:</strong> {pokemon.pokedexId}</p>
+        <p><strong>Item:</strong> {pokemon.item}</p>
       </div>
     </div>
   );
