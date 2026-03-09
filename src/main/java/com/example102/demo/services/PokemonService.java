@@ -16,17 +16,17 @@ public class PokemonService {
     private final Random random = new Random();
 
     public PokemonService() {
-        pokemonList.add(new Pokemon("Bulbasaur", 1, 45, 49, 45, 45));
-        pokemonList.add(new Pokemon("Charmander", 4, 52, 43, 65, 39));
-        pokemonList.add(new Pokemon("Squirtle", 7, 48, 65, 43, 44));
-        pokemonList.add(new Pokemon("Pikachu", 25, 55, 40, 90, 35));
+        pokemonList.add(new Pokemon("Bulbasaur", "timid", "citrus berry",1, 45, 49, 45, 45));
+        pokemonList.add(new Pokemon("Charmander", "jolly","leftovers",4, 52, 43, 65, 39));
+        pokemonList.add(new Pokemon("Squirtle","bold", "xayah berry",7, 48, 65, 43, 44));
+        pokemonList.add(new Pokemon("Pikachu", "emo", "zoom lens",25, 55, 40, 90, 35));
     }
 
     public List<Pokemon> getAllPokemon() {
         return pokemonList;
     }
 
-    public Pokemon hatchPokemon(String parent1Id, String parent2Id, String name) {
+    public Pokemon hatchPokemon(String parent1Id, String parent2Id, String name, String item, String nature) {
 
         Pokemon p1 = findById(parent1Id);
         Pokemon p2 = findById(parent2Id);
@@ -42,9 +42,8 @@ public class PokemonService {
 
 
         int randomPokedexId = ThreadLocalRandom.current().nextInt(0, 11);
-        Pokemon baby = new Pokemon(name, randomPokedexId, attack, defense, speed, hp);
+        Pokemon baby = new Pokemon(name, nature, item, randomPokedexId, attack, defense, speed, hp);
         pokemonList.add(baby);
-
         return baby;
     }
 
